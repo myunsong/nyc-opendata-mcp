@@ -8,7 +8,8 @@
     "nyc-mcp": "./index.js"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node test/test-runner.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.6.0",

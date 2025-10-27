@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { enrichWithVerification } from '../../../lib/verification.js';
 
 // Using Expense Budget dataset as Checkbook NYC 2.0 (mxwn-eh3b) is federated/non-tabular
 // For actual transaction-level spending, the Comptroller's XML API may be needed
@@ -54,7 +55,7 @@ export default async function searchSpending(params) {
     const totalBudget = response.data.reduce((sum, item) =>
       sum + parseFloat(item.current_modified_budget_amount || 0), 0);
 
-    return {
+    const result = {
       success: true,
       count: response.data.length,
       total_budget: totalBudget,
@@ -71,6 +72,9 @@ export default async function searchSpending(params) {
         financial_plan_amount: parseFloat(s.financial_plan_amount || 0)
       }))
     };
+
+    // Add verification metadata
+    return enrichWithVerification(result, 'comptroller-spending', params);
   } catch (error) {
     throw new Error(`Failed to search spending: ${error.message}`);
   }

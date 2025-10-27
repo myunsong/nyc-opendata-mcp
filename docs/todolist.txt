@@ -1,5 +1,82 @@
 # NYC Open Data MCP Server - Complete Roadmap to Production
 
+Who the Users Are (and Why They’d Care)
+
+Let’s identify real users who’d get genuine utility *without a front-end*:
+
+| User                                       | What They Can Do                                                                                               | Why It Matters                                                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Civic journalists / data reporters**     | Ask Claude for “spending anomalies in sanitation contracts” or “top 311 complaints in East Harlem this month.” | Cuts hours of data cleaning into seconds.                                        |
+| **Urban planners / policy researchers**    | Query live trends or create borough-level scorecards directly in chat.                                         | Turn city data into readable insights instantly.                                 |
+| **Students / educators**                   | Learn data literacy by chatting with NYC datasets.                                                             | Turns dry CSVs into interactive exploration.                                     |
+| **Developers / civic hackers**             | Use your MCP as a *backend API* for prototypes.                                                                | Saves months of boilerplate — the MCP already handles auth, validation, caching. |
+| **Residents / activists (via AI clients)** | Ask “why are there so many heat complaints in my zip?”                                                         | Increases transparency and civic awareness.                                      |
+
+---
+3. The Real Value Proposition
+
+Here’s a strong, one-sentence definition:
+
+> **NYC Open Data MCP** turns New York’s 2,000+ open datasets into a live, conversational API layer that any AI model or developer can plug into — with zero setup and production-grade reliability.
+
+It’s not a “frontend app.”
+It’s a **public data connector for the AI age.**
+
+That makes it:
+* reusable (MCP-compliant)
+* educational (teaches open data)
+* scalable (NYC → any city)
+* and collaborative (people can contribute new datasets)
+
+---
+4. How to Add *Value Without a Front-End*
+Here’s what adds immediate human value while keeping your minimal architecture:
+A. Build “query recipes”
+Add a `recipes/` folder with JSON or Markdown examples like:
+{
+  "name": "Neighborhood Quality Scorecard",
+  "description": "Compares complaint density, housing violations, and events per borough",
+  "tools": ["search_311_complaints", "search_hpd_violations", "get_upcoming_events"],
+  "parameters": { "borough": "Brooklyn", "windowDays": 30 }
+}
+Anyone can drop that into Claude and get a full report.
+
+B. Publish it as a `npx` package**
+So people can run:
+npx nyc-mcp "what are the most common 311 complaints this week?"
+That keeps it CLI-only, no UI needed.
+
+C. Add a “playground notebook”
+Create a `/notebooks/nyc-mcp-demo.ipynb` that runs live examples (in JS or Python).
+Researchers and civic hackers love quick-start notebooks.
+
+D. Write a “Why This Exists” README section**
+Frame it as:
+> NYC produces amazing data — but most people never see it because it’s trapped behind APIs and CSVs.
+> This project makes that data *usable by humans and AI* alike.
+
+---
+5. Roadmap (Value-First, Not Feature-First)
+
+| Phase          | Goal                                | Deliverable                                                                          |
+| -------------- | ----------------------------------- | ------------------------------------------------------------------------------------ |
+| **v1.0 (Now)** | “Works locally + open source ready” | GitHub release, working README                                                       |
+| **v1.1**       | “Usable by anyone”                  | CLI runner or `npx` package                                                          |
+| **v1.2**       | “Teachable”                         | Notebooks + examples + short tutorial                                                |
+| **v1.3**       | “Extensible”                        | Simple `add-new-dataset.md` guide                                                    |
+| **v2.0**       | “Portable”                          | Convert to `city-open-data-mcp` template (so any city can fork and swap dataset IDs) |
+
+That last one — making it *forkable for other cities* — could turn this into a civic-tech standard.
+
+---
+6. Big Picture You Could Aim Toward
+If you want this to truly *matter*, position it as: “The open, AI-native interface for city data.”
+
+Possible long-term directions:
+* create **multi-city support** (`city=open-data-mcp`)
+* build a **data observatory dashboard** (later)
+* get **featured by BetaNYC or NYC Planning Labs**
+
 PHASE 8: Launch & Grow
 8.1 Launch Activities
 - [ ] Post on Hacker News

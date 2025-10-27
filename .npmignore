@@ -1,0 +1,37 @@
+# Development files
+test/
+docs/todolist.txt
+docs/time-windows.md
+docs/priority-1-complete.md
+.github/
+.vscode/
+.idea/
+
+# CRITICAL: Don't include nested node_modules
+mcps/*/node_modules/
+
+# Build artifacts
+*.log
+npm-debug.log*
+outputs/
+
+# Environment
+.env
+.env.local
+.env.example
+
+# Git
+.git
+.gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+*.swp
+*.swo
+*~
+
+# Claude Code
+.claude/

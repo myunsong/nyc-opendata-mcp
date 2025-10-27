@@ -1,7 +1,7 @@
 {
-  "name": "nyc-open-data-mcp",
-  "version": "1.0.0",
-  "description": "MCP server for NYC Open Data - 311, HPD, Events, DOT, Comptroller",
+  "name": "@forest723/nyc-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for NYC Open Data - Give Claude AI access to 311, housing, events, traffic, and government spending data",
   "type": "module",
   "main": "index.js",
   "bin": {
@@ -17,11 +17,30 @@
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "nyc",
+    "new-york-city",
     "open-data",
     "311",
-    "claude"
+    "claude",
+    "ai",
+    "civic-tech",
+    "government",
+    "housing",
+    "transportation",
+    "data-analysis"
   ],
-  "author": "",
-  "license": "MIT"
+  "author": "Forest Coon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Forest723/nyc-mcp.git"
+  },
+  "homepage": "https://github.com/Forest723/nyc-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/Forest723/nyc-mcp/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

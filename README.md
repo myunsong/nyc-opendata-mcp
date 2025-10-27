@@ -32,12 +32,46 @@ Gives Claude access to live NYC data across **5 major city systems** with **17 p
 
 **[Read the full verification guide →](docs/DATA-VERIFICATION.md)** to understand how this tool achieves <1% hallucination risk for factual claims.
 
-## Quick Start
+## ⚡ Zero-Commitment Setup (20 seconds)
+
+**Try it instantly with `npx` - no installation required:**
+
+```bash
+npx @forest723/nyc-mcp
+```
+
+Then configure Claude to use it:
+
+**Claude Code:** `~/.config/claude/config.json`
+**Claude Desktop:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "nyc-open-data": {
+      "command": "npx",
+      "args": ["@forest723/nyc-mcp"]
+    }
+  }
+}
+```
+
+Restart Claude and ask: **"What are the top 5 complaint types in Brooklyn this month?"**
+
+If you see NYC 311 data, it's working! 🎉
+
+---
+
+## 📦 Full Installation (For Local Development)
 
 ### 1. Install
 
 ```bash
-git clone <your-repo>
+# Option A: Via npm (recommended)
+npm install -g @forest723/nyc-mcp
+
+# Option B: From source
+git clone https://github.com/Forest723/nyc-mcp.git
 cd nyc-mcp
 npm install
 ```
@@ -60,11 +94,18 @@ Setup time: 2 minutes | Cost: Free forever
 
 ### 3. Configure Claude
 
-Add to your Claude config:
+**If installed globally:**
+```json
+{
+  "mcpServers": {
+    "nyc-open-data": {
+      "command": "nyc-mcp"
+    }
+  }
+}
+```
 
-**Claude Code:** `~/.config/claude/config.json`
-**Claude Desktop:** `~/Library/Application Support/Claude/claude_desktop_config.json`
-
+**If installed from source:**
 ```json
 {
   "mcpServers": {
@@ -75,8 +116,6 @@ Add to your Claude config:
   }
 }
 ```
-
-Replace `/FULL/PATH/TO/nyc-mcp` with your actual path.
 
 ### 3. Restart Claude
 

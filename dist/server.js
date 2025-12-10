@@ -31,7 +31,15 @@ async function main() {
         enableJsonResponse: true
     });
     await mcpServer.connect(transport);
-    const app = createMcpExpressApp();
+    // Allow remote hosting (e.g., Azure Container Apps) by default. If you want to lock this
+    // down, set ALLOWED_HOSTS to a comma-separated list of hostnames (no ports), which will
+    // enable host header validation.
+    const allowedHosts = process.env.ALLOWED_HOSTS
+        ? process.env.ALLOWED_HOSTS.split(",").map(h => h.trim()).filter(Boolean)
+        : undefined;
+    const app = allowedHosts
+        ? createMcpExpressApp({ allowedHosts })
+        : createMcpExpressApp({ host: "0.0.0.0" });
     const handler = async (req, res) => {
         try {
             // Lightweight debug log to see incoming requests when troubleshooting

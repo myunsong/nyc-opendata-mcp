@@ -8,6 +8,7 @@ Streamable HTTP MCP server for NYC building datasets: GeoSearch address resoluti
 - `npm run dev` (builds then starts the HTTP MCP server)
 - `npm start` (after a build) to run directly from `dist/`
 - Set `PORT` if you want something other than the default `3001`
+- Optional: set `ALLOWED_HOSTS` (comma-separated, no ports) to enforce Host header validation. Leave unset for container platforms where the hostname is dynamic.
 - MCP endpoint: `http://localhost:3001/mcp` (Streamable HTTP transport)
 
 ## Tools

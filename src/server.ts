@@ -34,6 +34,7 @@ for (const tool of tools) {
 
 async function main() {
   const port = process.env.PORT ? Number(process.env.PORT) : 3001;
+  const authToken = process.env.AUTH_TOKEN;
   const transport = new StreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
     enableJsonResponse: true
@@ -50,6 +51,24 @@ async function main() {
   const app = allowedHosts
     ? createMcpExpressApp({ allowedHosts })
     : createMcpExpressApp({ host: "0.0.0.0" });
+
+  if (authToken) {
+    app.use((req, res, next) => {
+      const headerToken = req.headers["x-api-key"];
+      if (headerToken !== authToken) {
+        res.status(401).json({
+          jsonrpc: "2.0",
+          error: {
+            code: -32000,
+            message: "Unauthorized"
+          },
+          id: null
+        });
+        return;
+      }
+      next();
+    });
+  }
 
   const handler = async (req: any, res: any) => {
     try {
